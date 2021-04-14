@@ -1,0 +1,20 @@
+Package: tblcleanr
+Title: Cleaning data tables
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Stefan",
+           family = "Moog",
+           role = c("aut", "cre"),
+           email = "moogs@gmx.de")
+Maintainer: Stefan Moog <moogs@gmx.de>
+Description: Utility functions to make it easy to tidy real world data tables.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    dplyr,
+    tidyr,
+    tidyselect,
+    magrittr
