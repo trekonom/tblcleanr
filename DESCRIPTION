@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "moogs@gmx.de")
 Maintainer: Stefan Moog <moogs@gmx.de>
-Description: Utility functions to make it easy to tidy real world data tables.
+Description: Utility functions to make it easy to clean real world data tables.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
