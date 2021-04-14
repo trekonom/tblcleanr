@@ -18,3 +18,5 @@ Imports:
     tidyr,
     tidyselect,
     magrittr
+URL: https://github.com/trekonom/tblcleanr
+BugReports: https://github.com/trekonom/tblcleanr/issues
