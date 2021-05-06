@@ -21,3 +21,9 @@ str_replace_row <- function(x, rows, pattern, replacement) {
   x[rows, ] <- x_rows
   x
 }
+
+#' @rdname str_replace_row
+#' @export
+str_replace_row_na <- function(x, rows, pattern) {
+  str_replace_row(x, rows, pattern, NA_character_)
+}

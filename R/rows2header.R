@@ -13,6 +13,7 @@
 #' @importFrom dplyr slice ungroup c_across
 #' @importFrom tidyr unite
 rows2header <- function(data, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
+  data <- mutate(data, across(everything(), as.character))
   names_data <- names(data)
   cols2rename <- rep(TRUE, length(names_data))
   if (is.logical(all.cols) & isFALSE(all.cols)) {

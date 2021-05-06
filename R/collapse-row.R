@@ -1,6 +1,7 @@
 #' Collapse rows
 #'
 #' Collapse rows into one by concatenating contents column-wise
+#'
 #' @param x a dataframe
 #' @param rows rows to collapse
 #' @param sep separator. Defaults to "_".

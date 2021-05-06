@@ -1,5 +1,6 @@
 #' Remove matched patterns in rows
 #'
+#'
 #' @param x dataframe
 #' @param rows Rows to look for pattern.
 #' @param pattern Pattern to look for.
