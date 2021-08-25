@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of tblcleanr is to make it easier to clean real world data
+The goal of tblcleanr is to make it easier to tidy real world data
 tables.
 
 ## Installation
