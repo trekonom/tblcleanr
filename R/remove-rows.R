@@ -18,8 +18,23 @@ remove_rows_not_na_n <- function(x, n = 1) {
 
 #' @rdname remove_rows_not_na_n
 #' @export
+remove_rows_na_n <- function(x, n = 1) {
+  x <- rowwise(x)
+  x <- filter(x, !sum(!is.na(c_across())) %in% n)
+  ungroup(x)
+}
+
+#' @rdname remove_rows_not_na_n
+#' @export
+remove_cols_na_n <- function(x, n = 1) {
+  select(x, -which(colSums(!is.na(x)) %in% n))
+}
+
+#' @rdname remove_rows_not_na_n
+#' @export
 #' @importFrom dplyr select
 remove_rows_not_na_col <- function(x, col = 1, rows = NULL, .direction = "up") {
+  x <- mutate(x, across(everything(), as.character))
   if (is.character(rows)) {
     rows <- which(grepl(rows, x[, 1, drop = TRUE]))
     if (.direction == "down") {

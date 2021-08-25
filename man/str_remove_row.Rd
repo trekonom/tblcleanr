@@ -16,3 +16,6 @@ str_remove_row(x, rows, pattern)
 \description{
 Remove matched patterns in rows
 }
+\examples{
+# TO DO
+}

@@ -1,6 +1,6 @@
-#' Make Column Header from rows
+#' Make Names from rows
 #'
-#' @param data A data frame
+#' @param x A data frame
 #' @param rows rows to make the header from
 #' @param sep seperator. Defaults to "_".
 #' @param na.rm a logical. Remove NAs
@@ -8,13 +8,11 @@
 #'
 #' @export
 #'
-#' @example inst/ex/ex-rows2header.R
+#' @example inst/ex/ex-rows_to_names.R
 #'
-#' @importFrom dplyr slice ungroup c_across
 #' @importFrom tidyr unite
-rows2header <- function(data, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
-  data <- mutate(data, across(everything(), as.character))
-  names_data <- names(data)
+rows_to_names <- function(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
+  names_data <- names(x)
   cols2rename <- rep(TRUE, length(names_data))
   if (is.logical(all.cols) & isFALSE(all.cols)) {
     cols2rename <- grepl("^\\.{3}", names_data)
@@ -23,10 +21,14 @@ rows2header <- function(data, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
   } else if (is.numeric(all.cols)) {
     cols2rename[all.cols] <- FALSE
   }
-  header <- slice(data, rows)
+  header <- x[rows, ]
   header <- as.data.frame(t(header))
   header <- unite(header, "header", na.rm = na.rm)
-  data <- slice(data, -rows)
-  names(data)[cols2rename] <- header$header[cols2rename]
-  data
+  x <- x[-rows, ]
+  names(x)[cols2rename] <- header$header[cols2rename]
+  x
 }
+
+#' @rdname rows_to_names
+#' @export
+rows2header <- rows_to_names

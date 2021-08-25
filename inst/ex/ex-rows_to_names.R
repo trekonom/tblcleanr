@@ -4,10 +4,10 @@ d <- data.frame(
   c = c("Total", "40 - 60", 6)
 )
 # Rename all columns
-rows2header(d, 1:2)
+rows_to_names(d, 1:2)
 # Do not rename column "b"
-rows2header(d, 1:2, all.cols = "b")
+rows_to_names(d, 1:2, all.cols = "b")
 # Do not rename columns 2:3
-rows2header(d, 1:2, all.cols = 2:3)
+rows_to_names(d, 1:2, all.cols = 2:3)
 # Rename only columns starting with `...`
-rows2header(d, 1:2, all.cols = FALSE)
+rows_to_names(d, 1:2, all.cols = FALSE)

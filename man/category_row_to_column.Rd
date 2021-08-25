@@ -24,7 +24,7 @@ d <- data.frame(
   y = c("a", 1:2, "b", 1:2),
   z = c(NA, "A", "B", NA, "A", "B")
 )
-category_to_column(d, y, x, z)
+category_row_to_column(d, y, x, z)
 
-category_to_column(d, y, x, z, name = "small")
+category_row_to_column(d, y, x, z, name = "small")
 }

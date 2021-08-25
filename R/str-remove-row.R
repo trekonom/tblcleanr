@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-#' @example inst/ex/ex-str_remove_row
+#' @example inst/ex/ex-str_remove_row.R
 str_remove_row <- function(x, rows, pattern) {
   str_replace_row(x, rows, pattern, "")
 }

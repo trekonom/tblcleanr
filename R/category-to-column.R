@@ -13,18 +13,18 @@
 #'   y = c("a", 1:2, "b", 1:2),
 #'   z = c(NA, "A", "B", NA, "A", "B")
 #' )
-#' category_to_column(d, y, x, z)
+#' category_row_to_column(d, y, x, z)
 #'
-#' category_to_column(d, y, x, z, name = "small")
+#' category_row_to_column(d, y, x, z, name = "small")
 category_row_to_column <- function(x, val, ..., name = "name") {
   args <- rlang::enquos(...)
   x <- dplyr::rowwise(x)
-  x <- dplyr::mutate(x, is_type = all(is.na(dplyr::c_across(c(!!!args)))) & !is.na({{ val }}))
+  x <- dplyr::mutate(x, .is_category = all(is.na(dplyr::c_across(c(!!!args)))) & !is.na({{ val }}))
   x <- dplyr::ungroup(x)
-  x <- dplyr::mutate(x, !!rlang::sym(name) := ifelse(is_type, {{ val }}, NA_character_))
+  x <- dplyr::mutate(x, !!rlang::sym(name) := ifelse(.data[[".is_category"]], {{ val }}, NA_character_))
   x <- tidyr::fill(x, !!rlang::sym(name))
-  x <- dplyr::filter(x, !is_type)
-  x <- dplyr::select(x, -is_type)
+  x <- dplyr::filter(x, !.data[[".is_category"]])
+  x <- dplyr::select(x, -.data[[".is_category"]])
   x
 }
 

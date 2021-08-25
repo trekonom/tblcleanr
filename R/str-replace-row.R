@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-#' @example inst/ex/ex-str_replace_row
+#' @example inst/ex/ex-str_replace_row.R
 str_replace_row <- function(x, rows, pattern, replacement) {
   x_rows <- x[rows, ]
   if (pattern != "") {

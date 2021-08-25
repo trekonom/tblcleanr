@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-replace-row.R
 \name{str_replace_row}
 \alias{str_replace_row}
+\alias{str_replace_row_na}
 \title{Replace matched patterns in rows}
 \usage{
 str_replace_row(x, rows, pattern, replacement)
+
+str_replace_row_na(x, rows, pattern)
 }
 \arguments{
 \item{x}{dataframe}
@@ -17,4 +20,7 @@ str_replace_row(x, rows, pattern, replacement)
 }
 \description{
 Replace matched patterns in rows
+}
+\examples{
+# TO DO
 }
