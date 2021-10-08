@@ -23,7 +23,7 @@ rows_to_names <- function(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
   }
   header <- x[rows, ]
   header <- as.data.frame(t(header))
-  header <- unite(header, "header", na.rm = na.rm)
+  header <- unite(header, "header", sep = sep, na.rm = na.rm)
   x <- x[-rows, ]
   names(x)[cols2rename] <- header$header[cols2rename]
   x
