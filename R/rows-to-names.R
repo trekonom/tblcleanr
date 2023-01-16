@@ -3,6 +3,7 @@
 #' @param x A data frame
 #' @param rows rows to make the header from
 #' @param sep seperator. Defaults to "_".
+#' @param na.sep seperator to be used for NAs if `na.rm=FALSE`. Defaults to `sep`.
 #' @param na.rm a logical. Remove NAs
 #' @param all.cols Should all columns be renamed?
 #'
@@ -11,7 +12,7 @@
 #' @example inst/ex/ex-rows_to_names.R
 #'
 #' @importFrom tidyr unite
-rows_to_names <- function(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
+rows_to_names <- function(x, rows, sep = "_", na.sep = sep, na.rm = TRUE, all.cols = TRUE) {
   names_data <- names(x)
   cols2rename <- rep(TRUE, length(names_data))
   if (is.logical(all.cols) & isFALSE(all.cols)) {
@@ -24,8 +25,10 @@ rows_to_names <- function(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE) {
   header <- x[rows, ]
   header <- as.data.frame(t(header))
   header <- unite(header, "header", sep = sep, na.rm = na.rm)
+  header <- header[["header"]]
+  if (!na.rm) header <- gsub(paste0("NA", sep), paste0("NA", na.sep), header)
   x <- x[-rows, ]
-  names(x)[cols2rename] <- header$header[cols2rename]
+  names(x)[cols2rename] <- header[cols2rename]
   x
 }
 

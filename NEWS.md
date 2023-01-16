@@ -1,8 +1,8 @@
-# tblcleanr 0.1.0
-
-* Added a `NEWS.md` file to track changes to the package.
+# tblcleanr 0.1.0.9002
 
 ## New
+
+* rows_to_names gains argument `na.sep` to set a different seperator used for `NA`s if `na.rm=FALSE`.
 
 * tblcleanr gains functions remove_rows_na_n and remove_cols_na_n to remove rows and cols with a given number of NA values
 
@@ -20,3 +20,5 @@
 ## Bug fixes
 
 * remove_rows_not_na_col now automatically converts all columns to character
+
+* Added a `NEWS.md` file to track changes to the package.

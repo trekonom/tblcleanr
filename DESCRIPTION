@@ -1,6 +1,6 @@
 Package: tblcleanr
 Title: Cleaning data tables
-Version: 0.1.0.9001
+Version: 0.1.0.9002
 Authors@R: 
     person(given = "Stefan",
            family = "Moog",
@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Imports: 
     dplyr,
     tidyr,

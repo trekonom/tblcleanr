@@ -5,9 +5,9 @@
 \alias{rows2header}
 \title{Make Names from rows}
 \usage{
-rows_to_names(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE)
+rows_to_names(x, rows, sep = "_", na.sep = sep, na.rm = TRUE, all.cols = TRUE)
 
-rows2header(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE)
+rows2header(x, rows, sep = "_", na.sep = sep, na.rm = TRUE, all.cols = TRUE)
 }
 \arguments{
 \item{x}{A data frame}
@@ -15,6 +15,8 @@ rows2header(x, rows, sep = "_", na.rm = TRUE, all.cols = TRUE)
 \item{rows}{rows to make the header from}
 
 \item{sep}{seperator. Defaults to "_".}
+
+\item{na.sep}{seperator to be used for NAs if \code{na.rm=FALSE}. Defaults to \code{sep}.}
 
 \item{na.rm}{a logical. Remove NAs}
 
