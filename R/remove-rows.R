@@ -32,9 +32,8 @@ remove_cols_na_n <- function(x, n = 1) {
 
 #' @rdname remove_rows_not_na_n
 #' @export
-#' @importFrom dplyr select
 remove_rows_not_na_col <- function(x, col = 1, rows = NULL, .direction = "up") {
-  x <- mutate(x, across(everything(), as.character))
+  x[] <- lapply(x, as.character)
   if (is.character(rows)) {
     rows <- which(grepl(rows, x[, 1, drop = TRUE]))
     if (.direction == "down") {
@@ -50,8 +49,8 @@ remove_rows_not_na_col <- function(x, col = 1, rows = NULL, .direction = "up") {
   }
   x <- cbind(is_row_drop, x)
   cols <- setdiff(seq_along(names(x)), c(1, col + 1))
-  x <- rowwise(x)
-  x <- filter(x, !(is_row_drop & all(is.na(c_across(cols)))))
-  x <- ungroup(x)
-  select(x, -is_row_drop)
+  x <- x[!(is_row_drop & rowSums(is.na(x[cols])) == length(cols)), , drop = FALSE]
+  x[["is_row_drop"]] <- NULL
+
+  x
 }
