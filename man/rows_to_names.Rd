@@ -5,9 +5,25 @@
 \alias{rows2header}
 \title{Make Names from rows}
 \usage{
-rows_to_names(x, rows, sep = "_", na.sep = sep, na.rm = TRUE, all.cols = TRUE)
+rows_to_names(
+  x,
+  rows,
+  sep = "_",
+  na.sep = sep,
+  na.rm = TRUE,
+  all.cols = TRUE,
+  regex = "^(\\\\.{3}|X\\\\d+)"
+)
 
-rows2header(x, rows, sep = "_", na.sep = sep, na.rm = TRUE, all.cols = TRUE)
+rows2header(
+  x,
+  rows,
+  sep = "_",
+  na.sep = sep,
+  na.rm = TRUE,
+  all.cols = TRUE,
+  regex = "^(\\\\.{3}|X\\\\d+)"
+)
 }
 \arguments{
 \item{x}{A data frame}
@@ -21,6 +37,8 @@ rows2header(x, rows, sep = "_", na.sep = sep, na.rm = TRUE, all.cols = TRUE)
 \item{na.rm}{a logical. Remove NAs}
 
 \item{all.cols}{Should all columns be renamed?}
+
+\item{regex}{A regular expression to select columns to rename if \code{all.cols = FALSE}.}
 }
 \description{
 Make Names from rows

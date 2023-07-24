@@ -1,4 +1,10 @@
-# tblcleanr 0.1.0.9002
+# tblcleanr 0.1.1.9000
+
+## New
+
+* rows_to_names gains argument `regex` to select which columns to rename when `all.cols=FALSE`.
+
+# tblcleanr 0.1.1
 
 ## New
 
