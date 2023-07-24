@@ -9,25 +9,20 @@
 #' @export
 #'
 #' @example inst/ex/ex-remove_rows_not_na_col.R
-#' @importFrom dplyr rowwise filter ungroup c_across
 remove_rows_not_na_n <- function(x, n = 1) {
-  x <- rowwise(x)
-  x <- filter(x, !sum(is.na(c_across())) %in% n)
-  ungroup(x)
+  x[!rowSums(is.na(x)) %in% n, , drop = FALSE]
 }
 
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_rows_na_n <- function(x, n = 1) {
-  x <- rowwise(x)
-  x <- filter(x, !sum(!is.na(c_across())) %in% n)
-  ungroup(x)
+  x[!rowSums(!is.na(x)) %in% n, , drop = FALSE]
 }
 
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_cols_na_n <- function(x, n = 1) {
-  select(x, -which(colSums(!is.na(x)) %in% n))
+  x[!colSums(!is.na(x)) %in% n, drop = FALSE]
 }
 
 #' @rdname remove_rows_not_na_n
