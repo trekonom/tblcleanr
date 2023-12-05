@@ -2,7 +2,14 @@
 
 ## New
 
+* Add category_row_regex to move category rows to a new column based on a matching pattern.
+
 * rows_to_names gains argument `regex` to select which columns to rename when `all.cols=FALSE`.
+
+## Changes
+
+* Rename category_row_to_column as category_row_na. category_row_to_column still works. 
+  Note however that the `val` argument was renamed to `.col`.
 
 # tblcleanr 0.1.1
 
