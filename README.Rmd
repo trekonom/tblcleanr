@@ -28,3 +28,39 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("trekonom/tblcleanr")
 ```
+
+## Example
+
+Here is a typical example of how to use `tblcleanr` to tidy a messy data table. 
+The example data is drawn from the [`unpivotr`](https://nacnudus.github.io/unpivotr/) 
+package which serves a similar purpose and follows a simliar approach as `tblcleanr`:
+
+```{r}
+library(tidyverse)
+library(unpivotr)
+library(tblcleanr)
+
+x <- purpose$`up-left left-up`
+
+head(x)
+
+y <- x |>
+  # Fill empty cells in first header row
+  fill_row(1) |>
+  # Fill qualification column
+  fill(1) |>
+  # Move header rows to colum names
+  rows_to_names(1:2) |>
+  # Rename tidy columns
+  rename(qualification = 1, "age-band" = 2) |>
+  # Reshape to tidy format
+  pivot_longer(-c(qualification, `age-band`),
+    names_to = c("sex", "life_satisfaction"),
+    names_sep = "_",
+    values_to = "count"
+  ) |> 
+  # Convert data type
+  mutate(count = as.integer(count))
+
+head(y)
+```
