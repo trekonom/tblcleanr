@@ -37,7 +37,7 @@ category_row_na(d, y, x, z)
 
 category_row_na(d, y, x, z, name = "small")
 
-# Cleaning a Table with two different categories
+# Cleaning a Table with two different kinds of category rows
 d <- data.frame(
   x = c(NA, NA, "A", "B", NA, NA, "A", "B"),
   y = c("Table a", "Male",  1:2, "Table b", "Female",  1:2),
