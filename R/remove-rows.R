@@ -22,7 +22,7 @@ remove_rows_na_n <- function(x, n = 1) {
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_cols_na_n <- function(x, n = 1) {
-  x[!colSums(!is.na(x)) %in% n, drop = FALSE]
+  x[!colSums(!is.na(x)) %in% n]
 }
 
 #' @rdname remove_rows_not_na_n

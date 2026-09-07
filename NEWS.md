@@ -11,6 +11,9 @@
   `category_row_na()`) instead of bare column-name symbols, avoiding
   "no visible binding for global variable" `R CMD check` notes.
 
+* `remove_cols_na_n()` no longer emits a spurious "'drop' argument will be
+  ignored" warning on every call.
+
 ## Internal
 
 * Removed the unexported, unfinished `category_col_to_column()` helper.
