@@ -15,6 +15,8 @@
 #' @importFrom dplyr mutate across
 #' @importFrom tidyselect everything
 fill_row <- function(x, rows, direction = "right", browse = FALSE) {
+  check_data_frame(x)
+  check_rows(x, rows)
   if (browse) browser()
 
   nrows <- seq_along(rows)

@@ -1,3 +1,16 @@
+# tblcleanr 0.1.2.9000
+
+## New
+
+* Exported functions that take a data frame and row/column indices
+  (`fill_row()`, `rows_to_names()`/`rows2header()`, `collapse_row()`,
+  `str_replace_row()`/`str_remove_row()`/`str_replace_row_na()`,
+  `remove_rows_not_na_n()`, `remove_rows_na_n()`, `remove_cols_na_n()`,
+  `remove_rows_not_na_col()`, `category_row_na()`/`category_row_to_column()`,
+  `category_row_regex()`) now validate that `x` is a data frame and that
+  numeric `rows`/`col` arguments are within bounds, and error with a clear
+  message instead of failing with a cryptic base-R subsetting error.
+
 # tblcleanr 0.1.1.9000
 
 ## New

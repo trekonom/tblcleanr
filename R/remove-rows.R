@@ -10,24 +10,30 @@
 #'
 #' @example inst/ex/ex-remove_rows_not_na_col.R
 remove_rows_not_na_n <- function(x, n = 1) {
+  check_data_frame(x)
   x[!rowSums(is.na(x)) %in% n, , drop = FALSE]
 }
 
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_rows_na_n <- function(x, n = 1) {
+  check_data_frame(x)
   x[!rowSums(!is.na(x)) %in% n, , drop = FALSE]
 }
 
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_cols_na_n <- function(x, n = 1) {
+  check_data_frame(x)
   x[!colSums(!is.na(x)) %in% n, drop = FALSE]
 }
 
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_rows_not_na_col <- function(x, col = 1, rows = NULL, .direction = "up") {
+  check_data_frame(x)
+  check_col(x, col)
+  if (is.numeric(rows)) check_rows(x, rows)
   x[] <- lapply(x, as.character)
   if (is.character(rows)) {
     rows <- which(grepl(rows, x[, 1, drop = TRUE]))

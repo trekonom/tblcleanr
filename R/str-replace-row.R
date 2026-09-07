@@ -9,6 +9,8 @@
 #'
 #' @example inst/ex/ex-str_replace_row.R
 str_replace_row <- function(x, rows, pattern, replacement) {
+  check_data_frame(x)
+  check_rows(x, rows)
   x_rows <- x[rows, ]
   if (pattern != "") {
     x_rows <- dplyr::rowwise(x_rows)
