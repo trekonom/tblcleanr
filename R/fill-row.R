@@ -12,20 +12,20 @@
 #' @example inst/ex/ex-fill_row.R
 #'
 #' @importFrom tidyr fill
-#' @importFrom dplyr mutate across
-#' @importFrom tidyselect everything
 fill_row <- function(x, rows, direction = "right", browse = FALSE) {
   if (browse) browser()
 
   nrows <- seq_along(rows)
   tbl_row <- as.data.frame(t(x[rows,]))
   tbl_row <- if (direction == "right") {
-    fill(tbl_row, nrows, .direction = "down")
+    fill(tbl_row, tidyselect::all_of(nrows), .direction = "down")
   } else {
-    fill(tbl_row, nrows, .direction = "up")
+    fill(tbl_row, tidyselect::all_of(nrows), .direction = "up")
   }
   tbl_row <- as.data.frame(t(tbl_row))
-  x <- mutate(x, across(everything(), as.character))
+
+  x_orig <- x
   x[rows,] <- tbl_row
+  x[] <- Map(restore_class, x, x_orig)
   x
 }

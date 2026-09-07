@@ -1,6 +1,6 @@
 #' Category to Column
 #'
-#' @param .data a dataframe
+#' @param x a dataframe
 #' @param .col the column containing category names
 #' @param pattern a regex pattern to match category rows
 #' @param ... the columns to check for NA
@@ -36,26 +36,12 @@ category_row_regex <- function(x, .col, pattern, name = "name") {
   x |>
     dplyr::mutate(
       .is_category = grepl(pattern, {{ .col }}),
-      "{name}" := ifelse(.data$.is_category, {{ .col }}, NA_character_),
+      "{name}" := ifelse(.data[[".is_category"]], {{ .col }}, NA_character_),
       .before = 1
     ) |>
-    tidyr::fill(.data[[name]]) |>
-    dplyr::filter(!.is_category) |>
-    dplyr::select(-.is_category)
-}
-
-category_col_to_column <- function(x, .col, where, name = "name", value = "value") {
-  x <- dplyr::mutate(
-    x,
-    "{name}" := ifelse({{ where }}, {{ .col }}, NA_character_)
-  )
-  x <- tidyr::fill(x, .data[[name]])
-  x <- dplyr::mutate(
-    x,
-    {{ .col }} := ifelse({{ where }}, value, {{ .col }})
-  )
-
-  x
+    tidyr::fill(tidyselect::all_of(name)) |>
+    dplyr::filter(!.data[[".is_category"]]) |>
+    dplyr::select(-".is_category")
 }
 
 #' @rdname category-row-to-column

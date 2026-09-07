@@ -22,15 +22,14 @@ remove_rows_na_n <- function(x, n = 1) {
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_cols_na_n <- function(x, n = 1) {
-  x[!colSums(!is.na(x)) %in% n, drop = FALSE]
+  x[!colSums(!is.na(x)) %in% n]
 }
 
 #' @rdname remove_rows_not_na_n
 #' @export
 remove_rows_not_na_col <- function(x, col = 1, rows = NULL, .direction = "up") {
-  x[] <- lapply(x, as.character)
   if (is.character(rows)) {
-    rows <- which(grepl(rows, x[, 1, drop = TRUE]))
+    rows <- which(grepl(rows, as.character(x[[1]])))
     if (.direction == "down") {
       rows <- seq(max(rows), nrow(x), 1)
     } else {
@@ -42,10 +41,6 @@ remove_rows_not_na_col <- function(x, col = 1, rows = NULL, .direction = "up") {
   } else {
     is_row_drop <- rep(TRUE, nrow(x))
   }
-  x <- cbind(is_row_drop, x)
-  cols <- setdiff(seq_along(names(x)), c(1, col + 1))
-  x <- x[!(is_row_drop & rowSums(is.na(x[cols])) == length(cols)), , drop = FALSE]
-  x[["is_row_drop"]] <- NULL
-
-  x
+  cols <- setdiff(seq_along(names(x)), col)
+  x[!(is_row_drop & rowSums(is.na(x[cols])) == length(cols)), , drop = FALSE]
 }

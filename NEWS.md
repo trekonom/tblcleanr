@@ -1,3 +1,32 @@
+# tblcleanr 0.1.2.9000
+
+## Bug fixes
+
+* `fill_row()` and `remove_rows_not_na_col()` no longer silently coerce every
+  column of the input to character. Previously any call to either function
+  would return a data frame with all columns converted to `character`,
+  regardless of their original type.
+
+* `category_row_regex()` now uses `.data[[...]]` consistently (matching
+  `category_row_na()`) instead of bare column-name symbols, avoiding
+  "no visible binding for global variable" `R CMD check` notes.
+
+* `remove_cols_na_n()` no longer emits a spurious "'drop' argument will be
+  ignored" warning on every call.
+
+* `str_replace_row()` no longer emits a `dplyr::across()` deprecation
+  warning on every call with a non-empty `pattern`.
+
+* `fill_row()` no longer emits a tidyselect "external vector in selections"
+  deprecation warning on every call.
+
+* `category_row_regex()` no longer emits a tidyselect ".data in tidyselect
+  expressions" deprecation warning on every call.
+
+## Internal
+
+* Removed the unexported, unfinished `category_col_to_column()` helper.
+
 # tblcleanr 0.1.1.9000
 
 ## New

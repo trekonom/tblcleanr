@@ -12,7 +12,10 @@ str_replace_row <- function(x, rows, pattern, replacement) {
   x_rows <- x[rows, ]
   if (pattern != "") {
     x_rows <- dplyr::rowwise(x_rows)
-    x_rows <- mutate(x_rows, across(everything(), gsub, pattern = pattern, replacement = replacement))
+    x_rows <- dplyr::mutate(
+      x_rows,
+      dplyr::across(tidyselect::everything(), \(col) gsub(pattern, replacement, col))
+    )
     x_rows <- dplyr::ungroup(x_rows)
   } else {
     x_rows[x_rows == ""] <- replacement

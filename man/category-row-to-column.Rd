@@ -14,6 +14,8 @@ category_row_regex(x, .col, pattern, name = "name")
 category_row_to_column(x, .col, ..., name = "name")
 }
 \arguments{
+\item{x}{a dataframe}
+
 \item{.col}{the column containing category names}
 
 \item{...}{the columns to check for NA}
@@ -21,8 +23,6 @@ category_row_to_column(x, .col, ..., name = "name")
 \item{name}{a character. Name of column}
 
 \item{pattern}{a regex pattern to match category rows}
-
-\item{.data}{a dataframe}
 }
 \description{
 Category to Column
