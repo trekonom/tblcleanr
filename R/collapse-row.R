@@ -11,6 +11,8 @@
 #'
 #' @example inst/ex/ex-collapse_row.R
 collapse_row <- function(x, rows, sep = "_", na.rm = TRUE) {
+  check_data_frame(x)
+  check_rows(x, rows)
   x_rows <- x[rows, ]
   x_rows <- as.data.frame(t(x_rows))
   x_rows <- unite(x_rows, "collapse", na.rm = na.rm, sep = sep)[, 1, drop = TRUE]

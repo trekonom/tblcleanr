@@ -15,6 +15,8 @@
 #' @importFrom tidyr unite
 rows_to_names <- function(x, rows, sep = "_", na.sep = sep, na.rm = TRUE,
                           all.cols = TRUE, regex = "^(\\.{3}|X\\d+)") {
+  check_data_frame(x)
+  check_rows(x, rows)
   names_data <- names(x)
   cols2rename <- rep(TRUE, length(names_data))
   if (is.logical(all.cols) && isFALSE(all.cols)) {

@@ -13,6 +13,7 @@
 #' @rdname category-row-to-column
 #' @export
 category_row_na <- function(x, .col, ..., name = "name") {
+  check_data_frame(x)
   args <- rlang::enquos(...)
 
   x <- dplyr::mutate(x,
@@ -33,6 +34,7 @@ category_row_na <- function(x, .col, ..., name = "name") {
 #' @rdname category-row-to-column
 #' @export
 category_row_regex <- function(x, .col, pattern, name = "name") {
+  check_data_frame(x)
   x |>
     dplyr::mutate(
       .is_category = grepl(pattern, {{ .col }}),
