@@ -14,6 +14,9 @@
 * `remove_cols_na_n()` no longer emits a spurious "'drop' argument will be
   ignored" warning on every call.
 
+* `str_replace_row()` no longer emits a `dplyr::across()` deprecation
+  warning on every call with a non-empty `pattern`.
+
 ## Internal
 
 * Removed the unexported, unfinished `category_col_to_column()` helper.
