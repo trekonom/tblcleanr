@@ -13,15 +13,15 @@ test_that("fill_row fills right by default", {
 
 test_that("fill_row fills left", {
   d <- data.frame(
-    a = c("Total", 1),
-    b = c(NA, 2),
-    c = c(NA, 3),
+    a = c(NA, "1"),
+    b = c(NA, "2"),
+    c = c("Total", "3"),
     stringsAsFactors = FALSE
   )
   out <- fill_row(d, 1, direction = "left")
   expect_equal(out$a, c("Total", "1"))
-  expect_equal(out$b, c(NA, "2"))
-  expect_equal(out$c, c(NA, "3"))
+  expect_equal(out$b, c("Total", "2"))
+  expect_equal(out$c, c("Total", "3"))
 })
 
 test_that("fill_row preserves the class of columns it doesn't touch", {
