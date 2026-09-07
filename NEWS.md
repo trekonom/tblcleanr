@@ -1,3 +1,20 @@
+# tblcleanr 0.1.2.9000
+
+## Bug fixes
+
+* `fill_row()` and `remove_rows_not_na_col()` no longer silently coerce every
+  column of the input to character. Previously any call to either function
+  would return a data frame with all columns converted to `character`,
+  regardless of their original type.
+
+* `category_row_regex()` now uses `.data[[...]]` consistently (matching
+  `category_row_na()`) instead of bare column-name symbols, avoiding
+  "no visible binding for global variable" `R CMD check` notes.
+
+## Internal
+
+* Removed the unexported, unfinished `category_col_to_column()` helper.
+
 # tblcleanr 0.1.1.9000
 
 ## New

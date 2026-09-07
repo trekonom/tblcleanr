@@ -12,8 +12,6 @@
 #' @example inst/ex/ex-fill_row.R
 #'
 #' @importFrom tidyr fill
-#' @importFrom dplyr mutate across
-#' @importFrom tidyselect everything
 fill_row <- function(x, rows, direction = "right", browse = FALSE) {
   if (browse) browser()
 
@@ -25,7 +23,9 @@ fill_row <- function(x, rows, direction = "right", browse = FALSE) {
     fill(tbl_row, nrows, .direction = "up")
   }
   tbl_row <- as.data.frame(t(tbl_row))
-  x <- mutate(x, across(everything(), as.character))
+
+  x_orig <- x
   x[rows,] <- tbl_row
+  x[] <- Map(restore_class, x, x_orig)
   x
 }
