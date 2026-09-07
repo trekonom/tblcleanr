@@ -1,0 +1,34 @@
+url: https://trekonom.github.io/tblcleanr/
+
+reference:
+- title: Fill and collapse rows
+  desc: >
+    Fill missing values across a row, or collapse several rows into one.
+  contents:
+  - fill_row
+  - collapse_row
+
+- title: Promote rows to column names
+  contents:
+  - rows_to_names
+
+- title: Move category rows into a column
+  contents:
+  - category_row_na
+  - category_row_regex
+
+- title: Remove rows and columns
+  desc: >
+    Drop rows or columns based on how many missing values they contain.
+  contents:
+  - remove_rows_not_na_n
+  - remove_rows_not_na_col
+
+- title: Find and replace within rows
+  contents:
+  - str_replace_row
+  - str_remove_row
+
+- title: Utilities
+  contents:
+  - as_excel_date

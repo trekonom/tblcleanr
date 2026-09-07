@@ -1,0 +1,124 @@
+---
+title: "Get started with tblcleanr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get started with tblcleanr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tblcleanr)
+```
+
+Real-world spreadsheets are rarely tidy: header information is spread
+across several rows, category labels sit in their own rows instead of
+their own column, and the row/column names read.csv()/readxl generate
+(`X2`, `X3`, ...) leak into the data. `tblcleanr` provides small,
+composable functions to turn tables like that into tidy data, one row
+operation at a time.
+
+This vignette walks through a typical example: a cross-tabulation with
+a two-row header (sex, then age band) and a leading label column, read
+in the shape a spreadsheet import would produce it.
+
+```{r}
+x <- data.frame(
+  X2 = c(NA, NA, "Bachelor's degree", NA, NA, NA),
+  X3 = c(NA, NA, "15 - 24", "25 - 44", "45 - 64", "65+"),
+  X4 = c("Female", "0 - 6", "7000", "12000", "10000", NA),
+  X5 = c(NA, "7 - 10", "27000", "137000", "64000", "18000"),
+  X6 = c("Male", "0 - 6", NA, "9000", "7000", "7000"),
+  X7 = c(NA, "7 - 10", "13000", "81000", "66000", "17000")
+)
+x
+```
+
+Row 1 holds the `sex` header, but only where it changes ("Female" only
+appears once, "Male" only once); row 2 holds the `life_satisfaction`
+band; row 3 onwards holds the `qualification` label in the first
+column (only on its first occurrence) and the actual counts.
+
+## Fill in the gaps in the header rows
+
+[`fill_row()`](../reference/fill_row.html) fills `NA`s across a row,
+the row-wise equivalent of `tidyr::fill()`. Use it to propagate
+`"Female"`/`"Male"` across the columns they apply to:
+
+```{r}
+x <- fill_row(x, 1)
+x
+```
+
+## Fill in the gaps in a column
+
+The `qualification` label in `X2` only appears once per group, in the
+first data row of each group — that's `tidyr::fill()`, applied to a
+column rather than a row:
+
+```{r}
+x <- tidyr::fill(x, X2)
+x
+```
+
+## Promote header rows to column names
+
+[`rows_to_names()`](../reference/rows_to_names.html) turns one or more
+rows into column names, concatenating them with `sep`. By default it
+also renames any column whose name looks like a spreadsheet-import
+artifact (`X2`, `X3`, ... or `...1`, `...2`, ...), which is why `X2`
+picked up a name here too even though rows 1:2 are blank in that
+column:
+
+```{r}
+x <- rows_to_names(x, 1:2)
+x
+```
+
+## Rename and reshape to tidy form
+
+From here on, `x` is a normal (if wide) data frame, so ordinary
+dplyr/tidyr verbs take over: rename the still-generic columns, then
+`pivot_longer()` the sex/life-satisfaction combinations into rows.
+
+```{r}
+x <- dplyr::rename(x, qualification = 1, "age-band" = 2)
+x <- tidyr::pivot_longer(
+  x,
+  -c(qualification, `age-band`),
+  names_to = c("sex", "life_satisfaction"),
+  names_sep = "_",
+  values_to = "count"
+)
+x <- dplyr::mutate(x, count = as.integer(count))
+x
+```
+
+## Other building blocks
+
+`tblcleanr` has a few more row operations for shapes that show up
+often in messy spreadsheets, each documented with a runnable example:
+
+- [`collapse_row()`](../reference/collapse_row.html) concatenates
+  several rows into one, e.g. when a header is split across two rows
+  that should become a single label rather than two separate ones.
+- [`category_row_na()`](../reference/category-row-to-column.html) and
+  [`category_row_regex()`](../reference/category-row-to-column.html)
+  move a category label that sits in its own row (either detected by
+  "the rest of the row is empty" or by a regex) into a proper column.
+- [`remove_rows_not_na_n()`](../reference/remove_rows_not_na_n.html)
+  and friends drop rows/columns based on how many missing values they
+  have, e.g. to remove separator or footnote rows.
+- [`str_replace_row()`](../reference/str_replace_row.html) and
+  [`str_remove_row()`](../reference/str_remove_row.html) run a
+  `gsub()`-style replacement across specific rows only, e.g. to strip
+  footnote markers.
+- [`as_excel_date()`](../reference/as_excel_date.html) converts Excel's
+  numeric date serials to proper R `Date`s.

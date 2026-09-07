@@ -1,3 +1,16 @@
+# tblcleanr 0.1.2.9000
+
+## Documentation
+
+* `str_remove_row()` and `str_replace_row()` now have real, runnable
+  examples (previously placeholders).
+
+* Added a "Get started" vignette walking through a typical
+  messy-spreadsheet-to-tidy-data workflow.
+
+* Configured a real pkgdown reference index (grouped by task) instead
+  of an empty `_pkgdown.yml`.
+
 # tblcleanr 0.1.1.9000
 
 ## New
