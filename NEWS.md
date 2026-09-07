@@ -17,6 +17,9 @@
 * `str_replace_row()` no longer emits a `dplyr::across()` deprecation
   warning on every call with a non-empty `pattern`.
 
+* `fill_row()` no longer emits a tidyselect "external vector in selections"
+  deprecation warning on every call.
+
 ## Internal
 
 * Removed the unexported, unfinished `category_col_to_column()` helper.
