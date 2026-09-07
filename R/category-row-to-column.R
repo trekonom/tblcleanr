@@ -39,7 +39,7 @@ category_row_regex <- function(x, .col, pattern, name = "name") {
       "{name}" := ifelse(.data[[".is_category"]], {{ .col }}, NA_character_),
       .before = 1
     ) |>
-    tidyr::fill(.data[[name]]) |>
+    tidyr::fill(tidyselect::all_of(name)) |>
     dplyr::filter(!.data[[".is_category"]]) |>
     dplyr::select(-".is_category")
 }

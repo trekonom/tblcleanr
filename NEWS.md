@@ -20,6 +20,9 @@
 * `fill_row()` no longer emits a tidyselect "external vector in selections"
   deprecation warning on every call.
 
+* `category_row_regex()` no longer emits a tidyselect ".data in tidyselect
+  expressions" deprecation warning on every call.
+
 ## Internal
 
 * Removed the unexported, unfinished `category_col_to_column()` helper.
