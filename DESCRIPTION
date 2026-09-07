@@ -21,3 +21,6 @@ Imports:
     janitor
 URL: https://github.com/trekonom/tblcleanr
 BugReports: https://github.com/trekonom/tblcleanr/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
